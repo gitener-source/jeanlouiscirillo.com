@@ -373,6 +373,8 @@ canvas.viz{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 .rlink-yt:hover{background:rgba(255,40,40,.2)}
 .rlink-st{background:rgba(30,215,96,.07);border:1px solid rgba(30,215,96,.18);color:#1ed760}
 .rlink-st:hover{background:rgba(30,215,96,.15)}
+.rlink-am{background:rgba(252,60,60,.08);border:1px solid rgba(252,60,60,.2);color:#fc3c3c}
+.rlink-am:hover{background:rgba(252,60,60,.18)}
 .rp-divider{height:1px;background:var(--bd);margin:.85rem 0}
 
 /* ── PLAYER BAR ── */
@@ -518,6 +520,8 @@ input.vol-r::-webkit-slider-thumb{-webkit-appearance:none;width:11px;height:11px
 .blink-yt:hover{background:rgba(255,40,40,.2)}
 .blink-st{background:rgba(30,215,96,.07);border:1px solid rgba(30,215,96,.18);color:#1ed760}
 .blink-st:hover{background:rgba(30,215,96,.15)}
+.blink-am{background:rgba(252,60,60,.07);border:1px solid rgba(252,60,60,.18);color:#fc3c3c}
+.blink-am:hover{background:rgba(252,60,60,.15)}
 
 
 /* ── RESPONSIVE ── */
@@ -833,6 +837,105 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
   .admin-toggle{bottom:92px}
 }
 
+
+/* ══ PAGE ARTISTE BIO ══ */
+.artist-bio-page{flex:1;overflow-y:auto;padding:1.5rem;scrollbar-width:thin;scrollbar-color:var(--s3) transparent;display:flex;flex-direction:column;gap:1.5rem}
+.artist-bio-page::-webkit-scrollbar{width:3px}
+.artist-bio-page::-webkit-scrollbar-thumb{background:var(--s3);border-radius:2px}
+
+.ab-hero{display:grid;grid-template-columns:180px 1fr;gap:1.5rem;align-items:start;background:var(--s2);border:1px solid var(--bd);border-radius:14px;padding:1.5rem;position:relative;overflow:hidden}
+.ab-hero::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,var(--edm1),var(--na1),var(--nd1))}
+.ab-photo{width:180px;height:180px;border-radius:12px;overflow:hidden;flex-shrink:0;border:2px solid var(--bd2);box-shadow:0 12px 40px rgba(0,0,0,.6);background:var(--s3);display:flex;align-items:center;justify-content:center;font-family:var(--D);font-size:2.5rem;color:var(--t3);letter-spacing:.1em}
+.ab-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.ab-hero-info{display:flex;flex-direction:column;gap:.65rem}
+.ab-name{font-family:var(--D);font-size:2.2rem;letter-spacing:.12em;line-height:1;background:linear-gradient(90deg,var(--t1),var(--edm2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ab-title{font-size:.72rem;color:var(--t3);letter-spacing:.15em;text-transform:uppercase;margin-top:.1rem}
+.ab-tags{display:flex;flex-wrap:wrap;gap:.35rem;margin-top:.2rem}
+.ab-text{font-family:var(--DG);font-size:.96rem;color:var(--t2);line-height:1.95;font-weight:300;font-style:italic}
+
+.ab-section{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:1.2rem 1.4rem}
+.ab-sec-title{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);margin-bottom:.9rem;display:flex;align-items:center;gap:.5rem}
+.ab-sec-title::after{content:"";flex:1;height:1px;background:var(--bd)}
+
+.ab-timeline{display:flex;flex-direction:column;gap:.85rem}
+.ab-tl-item{display:flex;gap:1rem;align-items:flex-start}
+.ab-tl-year{font-family:var(--D);font-size:1rem;letter-spacing:.08em;color:var(--edm2);flex-shrink:0;width:52px;padding-top:.1rem}
+.ab-tl-dot{width:8px;height:8px;border-radius:50%;background:var(--edm1);flex-shrink:0;margin-top:.35rem;box-shadow:0 0 10px rgba(47,107,255,.5)}
+.ab-tl-content{}
+.ab-tl-title{font-size:.82rem;font-weight:600;color:var(--t1);line-height:1.3}
+.ab-tl-desc{font-size:.72rem;color:var(--t3);margin-top:.25rem;line-height:1.55}
+
+.ab-projects{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.ab-proj{border-radius:10px;padding:1rem 1.1rem;border:1px solid var(--bd);position:relative;overflow:hidden}
+.ab-proj::before{content:"";position:absolute;top:0;left:0;right:0;height:2px}
+.ab-proj-edm::before{background:linear-gradient(90deg,var(--edm1),var(--edm3))}
+.ab-proj-na::before{background:linear-gradient(90deg,var(--na1),var(--na3))}
+.ab-proj-head{display:flex;align-items:center;gap:.7rem;margin-bottom:.65rem}
+.ab-proj-logo{width:42px;height:42px;border-radius:8px;overflow:hidden;flex-shrink:0;border:1px solid var(--bd2)}
+.ab-proj-logo img{width:100%;height:100%;object-fit:cover;display:block}
+.ab-proj-name{font-family:var(--D);font-size:1.1rem;letter-spacing:.1em;color:var(--t1);line-height:1}
+.ab-proj-genre{font-size:.6rem;color:var(--t3);letter-spacing:.1em;margin-top:2px}
+.ab-proj-text{font-size:.76rem;color:var(--t2);line-height:1.65}
+.ab-proj-links{display:flex;gap:.35rem;margin-top:.75rem;flex-wrap:wrap}
+
+/* ══ PAGE CONTACT ══ */
+.contact-page{flex:1;overflow-y:auto;padding:1.5rem;scrollbar-width:thin;scrollbar-color:var(--s3) transparent;display:flex;flex-direction:column;gap:1.2rem}
+.contact-page::-webkit-scrollbar{width:3px}
+
+.ct-header{text-align:center;padding:.5rem 0}
+.ct-title{font-family:var(--D);font-size:2rem;letter-spacing:.14em;background:linear-gradient(90deg,var(--t1),var(--edm2));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.ct-sub{font-size:.74rem;color:var(--t3);letter-spacing:.1em;margin-top:.4rem}
+
+.ct-grid{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem;align-items:start}
+
+.ct-card{background:var(--s2);border:1px solid var(--bd);border-radius:12px;padding:1.3rem;display:flex;flex-direction:column;gap:.75rem}
+.ct-card-title{font-size:.58rem;letter-spacing:.18em;text-transform:uppercase;color:var(--t3);display:flex;align-items:center;gap:.5rem}
+.ct-card-title::after{content:"";flex:1;height:1px;background:var(--bd)}
+
+/* Formulaire */
+.ct-field{display:flex;flex-direction:column;gap:.35rem}
+.ct-label{font-size:.65rem;color:var(--t2);letter-spacing:.07em;font-weight:500}
+.ct-input,.ct-textarea{background:var(--s3);border:1px solid var(--bd2);border-radius:7px;padding:.6rem .8rem;font-family:var(--U);font-size:.78rem;color:var(--t1);outline:none;transition:border-color .18s;width:100%}
+.ct-input:focus,.ct-textarea:focus{border-color:var(--edm1);box-shadow:0 0 0 2px rgba(47,107,255,.15)}
+.ct-textarea{resize:none;height:110px;line-height:1.6}
+.ct-input::placeholder,.ct-textarea::placeholder{color:var(--t3)}
+.ct-send{width:100%;padding:.65rem;border-radius:7px;border:none;background:var(--edm1);color:#fff;font-family:var(--U);font-size:.78rem;font-weight:600;letter-spacing:.06em;cursor:pointer;transition:all .18s;box-shadow:0 0 18px rgba(47,107,255,.3)}
+.ct-send:hover{background:var(--edm2);transform:translateY(-1px)}
+.ct-send:active{transform:none}
+.ct-success{display:none;text-align:center;padding:1rem;background:rgba(30,215,96,.08);border:1px solid rgba(30,215,96,.2);border-radius:8px;color:#1ed760;font-size:.8rem}
+
+/* Infos contact */
+.ct-info-row{display:flex;align-items:center;gap:.75rem;padding:.65rem .8rem;background:var(--s3);border-radius:8px;border:1px solid var(--bd);text-decoration:none;transition:all .16s}
+.ct-info-row:hover{background:var(--s4);border-color:var(--bd2);transform:translateX(3px)}
+.ct-info-ic{width:32px;height:32px;border-radius:7px;display:flex;align-items:center;justify-content:center;font-size:.85rem;flex-shrink:0}
+.ct-info-label{font-size:.6rem;color:var(--t3);letter-spacing:.08em;text-transform:uppercase}
+.ct-info-val{font-size:.78rem;color:var(--t1);font-weight:500;margin-top:.1rem}
+
+.ct-social-grid{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.ct-soc{display:flex;align-items:center;gap:.5rem;padding:.55rem .7rem;border-radius:8px;text-decoration:none;font-size:.72rem;font-weight:500;border:1px solid;transition:all .16s}
+.ct-soc:hover{transform:translateY(-2px)}
+.ct-soc-yt{background:rgba(255,40,40,.08);border-color:rgba(255,40,40,.2);color:#ff5555}
+.ct-soc-yt:hover{background:rgba(255,40,40,.18)}
+.ct-soc-st{background:rgba(30,215,96,.07);border-color:rgba(30,215,96,.18);color:#1ed760}
+.ct-soc-st:hover{background:rgba(30,215,96,.15)}
+.ct-soc-am{background:rgba(252,60,60,.07);border-color:rgba(252,60,60,.18);color:#fc3c3c}
+.ct-soc-am:hover{background:rgba(252,60,60,.15)}
+.ct-soc-yt2{background:rgba(255,40,40,.08);border-color:rgba(255,40,40,.2);color:#ff5555}
+.ct-soc-yt2:hover{background:rgba(255,40,40,.18)}
+
+.ct-press{background:var(--s3);border:1px solid var(--bd2);border-radius:8px;padding:.9rem 1rem;display:flex;align-items:center;gap:.8rem}
+.ct-press-ic{font-size:1.3rem;flex-shrink:0}
+.ct-press-text{font-size:.74rem;color:var(--t2);line-height:1.55}
+.ct-press-text strong{color:var(--t1);display:block;font-size:.78rem;margin-bottom:.2rem}
+
+@media(max-width:760px){
+  .ab-hero{grid-template-columns:1fr}
+  .ab-photo{width:120px;height:120px}
+  .ab-projects{grid-template-columns:1fr}
+  .ct-grid{grid-template-columns:1fr}
+  .ct-social-grid{grid-template-columns:1fr 1fr}
+}
+
 </style>
 </head>
 <body>
@@ -892,9 +995,10 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
     <button class="sbtab" id="sbt-na"  onclick="switchAlbum('na')">Harmony</button>
     <button class="sbtab" id="sbt-nd"  onclick="switchAlbum('nd')">Night Dream</button>
     <button class="sbtab" id="sbt-edm" onclick="switchAlbum('edm')">Aevo Rising</button>
-    
+    <button class="sbtab" style="color:var(--edm3);font-size:.58rem;padding:.4rem .3rem" onclick="loadFromServer(curAlbum)" title="Charger depuis jeanlouiscirillo.com">🌐</button>
   </div>
-  
+  <div class="drop-zone hide-when-online" id="dropZone">
+    <div class="dz-t"><strong>Glissez fichiers ou dossier ici</strong>MP3 · WAV · FLAC · M4A · OGG<br><span style="font-size:.55rem;color:var(--nd2);opacity:.7">💾 Sauvegardé automatiquement</span></div>
   </div>
   <div class="tl" id="trackList"></div>
 </aside>
@@ -935,7 +1039,8 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
           </div>
           <div class="bio-links">
             <a href="https://www.youtube.com/@CirilloLumen" target="_blank" class="blink blink-yt">▶ YouTube</a>
-            <a href="#" class="blink blink-st">♪ Spotify</a>
+            <a href="https://open.spotify.com/intl-fr/artist/4Bn1CjZd2GXItKa41ABTYw" target="_blank" class="blink blink-st">♪ Spotify</a>
+            <a href="https://music.apple.com/us/album/aevo-rising/1877441353" target="_blank" class="blink blink-am"> Apple Music</a>
           </div>
         </div>
         <div class="bio-card bio-na">
@@ -954,7 +1059,8 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
           </div>
           <div class="bio-links">
             <a href="https://www.youtube.com/@EDERSHIELD" target="_blank" class="blink blink-yt">▶ YouTube</a>
-            <a href="#" class="blink blink-st">♪ Spotify</a>
+            <a href="https://open.spotify.com/intl-fr/artist/4Bn1CjZd2GXItKa41ABTYw" target="_blank" class="blink blink-st">♪ Spotify</a>
+            <a href="https://music.apple.com/us/album/aevo-rising/1877441353" target="_blank" class="blink blink-am"> Apple Music</a>
           </div>
         </div>
       </div>
@@ -1051,6 +1157,167 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
 
     </div>
   </div>
+
+  <!-- PAGE ARTISTE -->
+  <div class="page" id="pageArtist">
+    <div class="artist-bio-page">
+
+      <!-- Hero -->
+      <div class="ab-hero">
+        <div class="ab-photo" id="abPhoto">JLC</div>
+        <div class="ab-hero-info">
+          <div>
+            <div class="ab-name">Jean-Louis Cirillo</div>
+            <div class="ab-title">Compositeur · Producteur · Peintre contemporain</div>
+          </div>
+          <div class="ab-tags">
+            <span class="btag btag-edm">Electronic</span>
+            <span class="btag btag-edm">Dance Music</span>
+            <span class="btag btag-na">New Age</span>
+            <span class="btag btag-na">Ambient</span>
+            <span class="btag btag-na">Peinture</span>
+          </div>
+          <div class="ab-text">Artiste pluridisciplinaire, Jean-Louis Cirillo compose et produit sous deux alias distincts : <strong>Cirillo Lumen</strong> pour la musique électronique et dance, et <strong>Edershield</strong> pour ses créations New Age et ambient. Distribué sur 24 plateformes de streaming mondiales via son label indépendant <strong>Studio Eleydes</strong>, il développe un univers sonore profond, entre énergie et contemplation.</div>
+        </div>
+      </div>
+
+      <!-- Parcours -->
+      <div class="ab-section">
+        <div class="ab-sec-title">Parcours artistique</div>
+        <div class="ab-timeline">
+          <div class="ab-tl-item">
+            <div class="ab-tl-year">2024</div>
+            <div class="ab-tl-dot"></div>
+            <div class="ab-tl-content">
+              <div class="ab-tl-title">Harmony in the Time — Edershield</div>
+              <div class="ab-tl-desc">Premier album New Age, 10 compositions cinématiques publiées en octobre 2024 sous Studio Eleydes. Distribué sur 24 plateformes mondiales.</div>
+            </div>
+          </div>
+          <div class="ab-tl-item">
+            <div class="ab-tl-year">2025</div>
+            <div class="ab-tl-dot" style="background:var(--na1);box-shadow:0 0 10px rgba(122,77,255,.5)"></div>
+            <div class="ab-tl-content">
+              <div class="ab-tl-title">Night Dream Glow — Edershield</div>
+              <div class="ab-tl-desc">Deuxième album Edershield, 11 titres ambient publiés le 1er avril 2025. Un voyage nocturne entre rêve, lumière intérieure et silence.</div>
+            </div>
+          </div>
+          <div class="ab-tl-item">
+            <div class="ab-tl-year">2026</div>
+            <div class="ab-tl-dot" style="background:var(--nd1);box-shadow:0 0 10px rgba(0,167,214,.5)"></div>
+            <div class="ab-tl-content">
+              <div class="ab-tl-title">Aevo Rising — Cirillo Lumen</div>
+              <div class="ab-tl-desc">20 compositions EDM publiées le 12 février 2026. Un album qui traverse l'énergie du dancefloor et la profondeur émotionnelle, avec des univers sonores uniques — Vaélis, Naéva, Kéora.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Projets -->
+      <div class="ab-section">
+        <div class="ab-sec-title">Projets musicaux</div>
+        <div class="ab-projects">
+          <div class="ab-proj ab-proj-edm" style="background:rgba(47,107,255,.05)">
+            <div class="ab-proj-head">
+              <div class="ab-proj-logo"><img id="abLogoEdm" src="" alt="Cirillo Lumen"></div>
+              <div><div class="ab-proj-name">Cirillo Lumen</div><div class="ab-proj-genre">Electronic · Dance Music</div></div>
+            </div>
+            <div class="ab-proj-text">Projet EDM né d'une vision sonore claire : créer des compositions qui allient l'énergie du dancefloor à la profondeur émotionnelle. Chaque titre porte une identité propre.</div>
+            <div class="ab-proj-links">
+              <a href="https://www.youtube.com/@CirilloLumen" target="_blank" class="blink blink-yt">▶ YouTube</a>
+              <a href="https://open.spotify.com/intl-fr/artist/4Bn1CjZd2GXItKa41ABTYw" target="_blank" class="blink blink-st">♪ Spotify</a>
+              <a href="https://music.apple.com/us/album/aevo-rising/1877441353" target="_blank" class="blink blink-am"> Apple Music</a>
+            </div>
+          </div>
+          <div class="ab-proj ab-proj-na" style="background:rgba(122,77,255,.05)">
+            <div class="ab-proj-head">
+              <div class="ab-proj-logo"><img id="abLogoNa" src="" alt="Edershield"></div>
+              <div><div class="ab-proj-name">Edershield</div><div class="ab-proj-genre">New Age · Ambient · Studio Eleydes</div></div>
+            </div>
+            <div class="ab-proj-text">Projet New Age contemplatif et cinématique, distribué sur 24 plateformes. Deux albums publiés qui traversent le temps, la lumière et le silence intérieur.</div>
+            <div class="ab-proj-links">
+              <a href="https://www.youtube.com/@EDERSHIELD" target="_blank" class="blink blink-yt">▶ YouTube</a>
+              <a href="https://open.spotify.com/intl-fr/artist/4Bn1CjZd2GXItKa41ABTYw" target="_blank" class="blink blink-st">♪ Spotify</a>
+              <a href="https://music.apple.com/us/album/aevo-rising/1877441353" target="_blank" class="blink blink-am"> Apple Music</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- PAGE CONTACT -->
+  <div class="page" id="pageContact">
+    <div class="contact-page">
+
+      <div class="ct-header">
+        <div class="ct-title">Contact</div>
+        <div class="ct-sub">Studio Eleydes · Jean-Louis Cirillo</div>
+      </div>
+
+      <div class="ct-grid">
+
+        <!-- Formulaire -->
+        <div class="ct-card">
+          <div class="ct-card-title">Envoyer un message</div>
+          <div class="ct-field">
+            <label class="ct-label">Nom</label>
+            <input class="ct-input" id="ctName" type="text" placeholder="Votre nom">
+          </div>
+          <div class="ct-field">
+            <label class="ct-label">Email</label>
+            <input class="ct-input" id="ctEmail" type="email" placeholder="votre@email.com">
+          </div>
+          <div class="ct-field">
+            <label class="ct-label">Message</label>
+            <textarea class="ct-textarea" id="ctMsg" placeholder="Votre message…"></textarea>
+          </div>
+          <button class="ct-send" onclick="sendContact()">Envoyer →</button>
+          <div class="ct-success" id="ctSuccess">✓ Message envoyé ! Je vous répondrai rapidement.</div>
+        </div>
+
+        <!-- Infos -->
+        <div style="display:flex;flex-direction:column;gap:.85rem">
+
+          <div class="ct-card">
+            <div class="ct-card-title">Coordonnées</div>
+            <a href="mailto:cirillo@orange.fr" class="ct-info-row">
+              <div class="ct-info-ic" style="background:rgba(47,107,255,.12)">✉</div>
+              <div><div class="ct-info-label">Email</div><div class="ct-info-val">cirillo@orange.fr</div></div>
+            </a>
+            <a href="https://jeanlouiscirillo.com" class="ct-info-row">
+              <div class="ct-info-ic" style="background:rgba(122,77,255,.12)">🌐</div>
+              <div><div class="ct-info-label">Site web</div><div class="ct-info-val">jeanlouiscirillo.com</div></div>
+            </a>
+          </div>
+
+          <div class="ct-card">
+            <div class="ct-card-title">Réseaux & Streaming</div>
+            <div class="ct-social-grid">
+              <a href="https://www.youtube.com/@CirilloLumen" target="_blank" class="ct-soc ct-soc-yt">▶ CirilloLumen</a>
+              <a href="https://www.youtube.com/@EDERSHIELD" target="_blank" class="ct-soc ct-soc-yt2">▶ Edershield</a>
+              <a href="https://open.spotify.com/intl-fr/artist/4Bn1CjZd2GXItKa41ABTYw" target="_blank" class="ct-soc ct-soc-st">♪ Spotify</a>
+              <a href="https://music.apple.com/us/album/aevo-rising/1877441353" target="_blank" class="ct-soc ct-soc-am"> Apple Music</a>
+            </div>
+          </div>
+
+          <div class="ct-card">
+            <div class="ct-card-title">Presse & Booking</div>
+            <div class="ct-press">
+              <div class="ct-press-ic">📰</div>
+              <div class="ct-press-text">
+                <strong>Demandes presse & collaborations</strong>
+                Pour toute demande professionnelle, interviews ou collaborations artistiques, contactez directement via l'email ou le formulaire ci-contre.
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
 </main>
 
 <!-- RIGHT PANEL — big album cover + bio -->
@@ -1079,7 +1346,8 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
     <div class="rp-divider"></div>
     <div class="rp-links">
       <a href="https://www.youtube.com/@CirilloLumen" target="_blank" id="rpYtLink" class="rlink rlink-yt">▶ YouTube</a>
-      <a href="#" class="rlink rlink-st">♪ Spotify</a>
+      <a href="https://open.spotify.com/intl-fr/artist/4Bn1CjZd2GXItKa41ABTYw" target="_blank" class="rlink rlink-st">♪ Spotify</a>
+      <a href="https://music.apple.com/us/album/aevo-rising/1877441353" target="_blank" id="rpAmLink" class="rlink rlink-am"> Apple Music</a>
     </div>
   </div>
 </aside>
@@ -1107,6 +1375,8 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
     <button class="pgnav on" id="pnavPlayer" onclick="showPage('player')">Player</button>
     <button class="pgnav" id="pnavBio" onclick="showPage('bio')">À propos</button>
     <button class="pgnav" id="pnavVideo" onclick="showPage('video')">▶ Vidéos</button>
+    <button class="pgnav" id="pnavArtist" onclick="showPage('artist')">Artiste</button>
+    <button class="pgnav" id="pnavContact" onclick="showPage('contact')">Contact</button>
   </div>
   <div class="vol-wrap">
     <span class="vol-ic">🔈</span>
@@ -1114,6 +1384,10 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
     <span style="font-size:.6rem;color:var(--t3);min-width:26px" id="volPct">80%</span>
   </div>
 </footer>
+</div>
+<!-- Copyright -->
+<div style="position:fixed;bottom:0;left:0;z-index:50;padding:.28rem .75rem;font-size:.55rem;color:var(--t3);letter-spacing:.08em;pointer-events:none;opacity:.45;">
+  © 2026 Jean-Louis Cirillo · Studio Eleydes · Tous droits réservés
 </div>
 <!-- Bouton admin discret -->
 <button class="admin-toggle" id="adminToggle" title="Admin">⚙</button>
@@ -1141,13 +1415,12 @@ function setCoverFor(albumId){
 }
 
 // ALBUM DATA
-// Audio URLs — fichiers sur jeanlouiscirillo.com
-const _base=window.location.pathname.includes('jeanlouiscirillo.com')?'/jeanlouiscirillo.com':'';
-const _d=s=>_base+'/audio/'+atob(s);
+// Audio URLs — obfusquées (base64), décodées à la volée
+const _d=s=>"/audio/"+atob(s).replace(/\.wav$/i,".mp3");
 const AUDIO_URLS = {
-  edm: ["YWV2by1yaXNpbmcvMDEtYWV2by1yaXNpbmcubXAz","YWV2by1yaXNpbmcvMDItYWVpcmEtZW1vdGlvbi5tcDM=","YWV2by1yaXNpbmcvMDMtbHVtYS1zZXF1ZW5jZS5tcDM=","YWV2by1yaXNpbmcvMDQta29yYS1tYW5hLm1wMw==","YWV2by1yaXNpbmcvMDUtZm9yd2FyZC1pbnRvLXRoZS1saWdodC5tcDM=","YWV2by1yaXNpbmcvMDYtc29sZW4tYXJjLm1wMw==","YWV2by1yaXNpbmcvMDctdGFrYW5hLXNlbG8ubXAz","YWV2by1yaXNpbmcvMDgtZmVlbC1hbGl2ZS10b25pZ2h0Lm1wMw==","YWV2by1yaXNpbmcvMDktd2hlbi1kcnVtcy1tZWV0LXRoZS1za3kubXAz","YWV2by1yaXNpbmcvMTAtbmFldmEtY3ljbGUubXAz","YWV2by1yaXNpbmcvMTEtbGlmdC1mcm9tLXRoZS1maXJzdC1iZWF0Lm1wMw==","YWV2by1yaXNpbmcvMTItdG91Y2gtdGhlLXNreS5tcDM=","YWV2by1yaXNpbmcvMTMtZnJhZ21lbnRzLW9mLWlubmVyLWxpZ2h0Lm1wMw==","YWV2by1yaXNpbmcvMTQtb21uYXJhLm1wMw==","YWV2by1yaXNpbmcvMTUtdmFlbGlzLWRyaWZ0Lm1wMw==","YWV2by1yaXNpbmcvMTYtb3J5YS1mbHV4Lm1wMw==","YWV2by1yaXNpbmcvMTcta2Vub3ItZmxvdy5tcDM=","YWV2by1yaXNpbmcvMTgta2VvcmEtd2F2ZS5tcDM=","YWV2by1yaXNpbmcvMTktbm90aGluZy10by13YWl0LWZvci5tcDM=","YWV2by1yaXNpbmcvMjAtbmFldmEubXAz"].map(_d),
-  na:  ["aGFybW9ueS8wMS1oYXJtb255LWluLXRoZS10aW1lLm1wMw==","aGFybW9ueS8wMi1sZWdlbmRzLW9mLXRoZS1lYXJ0aC5tcDM=","aGFybW9ueS8wMy1mcm9tLWFzaGVzLXRvLXZpY3RvcnkubXAz","aGFybW9ueS8wNC1mb3ItdGhpcy13b3JsZC5tcDM=","aGFybW9ueS8wNS1pLWNhbGwtZm9ydGgtdGhlLWVsZGVyLWRheXMubXAz","aGFybW9ueS8wNi1sb3N0LWluLXRoZS1zaGVlbi5tcDM=","aGFybW9ueS8wNy1pLWZseS1pbnRvLXRoZS1jb3NtaWMtbGlnaHRzLm1wMw==","aGFybW9ueS8wOC1pbi10aGUtbWlzdC1vZi1ldmVuaW5nLWxpZ2h0cy5tcDM=","aGFybW9ueS8wOS13aGVyZS10aGUtZWNob2VzLXBsYXkubXAz","aGFybW9ueS8xMC1ndWlkZWQtYnktc2lsZW5jZS5tcDM="].map(_d),
-  nd:  ["bmlnaHQtZHJlYW0vMDEtbmlnaHQtZHJlYW0tZ2xvdy5tcDM=","bmlnaHQtZHJlYW0vMDIteW91LWJyaW5nLXRoZS1uaWdodC5tcDM=","bmlnaHQtZHJlYW0vMDMtaW50aW1hdGUtZWxlY3RyaWMtZWNob2VzLm1wMw==","bmlnaHQtZHJlYW0vMDQtd2hlcmUtZHJlYW1zLWFyZS1wcm9mb3VuZC5tcDM=","bmlnaHQtZHJlYW0vMDUtc2VjcmV0LWVjaG9lcy1vZi10aW1lLm1wMw==","bmlnaHQtZHJlYW0vMDYtd2UtYWxsLWxpZ2h0LXRoYXQtc2hpbmVzLm1wMw==","bmlnaHQtZHJlYW0vMDctc3VidGxlLWNvbm5lY3Rpb25zLm1wMw==","bmlnaHQtZHJlYW0vMDgtZGVlcC1pbnNpZGUtdGhlLXNvdW5kLm1wMw==","bmlnaHQtZHJlYW0vMDktaW4tdGhpcy1zd2VldC1odXNoLm1wMw==","bmlnaHQtZHJlYW0vMTAtd2hlcmUtc2VjcmV0cy1icmVhdGhlLm1wMw==","bmlnaHQtZHJlYW0vMTEtd2UtZmVlbC10aGUtaGFybW9ueS5tcDM="].map(_d)
+  edm: ["YWV2by1yaXNpbmcvMDEtYWV2by1yaXNpbmcud2F2","YWV2by1yaXNpbmcvMDItYWVpcmEtZW1vdGlvbi53YXY=","YWV2by1yaXNpbmcvMDMtbHVtYS1zZXF1ZW5jZS53YXY=","YWV2by1yaXNpbmcvMDQta29yYS1tYW5hLndhdg==","YWV2by1yaXNpbmcvMDUtZm9yd2FyZC1pbnRvLXRoZS1saWdodC53YXY=","YWV2by1yaXNpbmcvMDYtc29sZW4tYXJjLndhdg==","YWV2by1yaXNpbmcvMDctdGFrYW5hLXNlbG8ud2F2","YWV2by1yaXNpbmcvMDgtZmVlbC1hbGl2ZS10b25pZ2h0Lndhdg==","YWV2by1yaXNpbmcvMDktd2hlbi1kcnVtcy1tZWV0LXRoZS1za3kud2F2","YWV2by1yaXNpbmcvMTAtbmFldmEtY3ljbGUud2F2","YWV2by1yaXNpbmcvMTEtbGlmdC1mcm9tLXRoZS1maXJzdC1iZWF0Lndhdg==","YWV2by1yaXNpbmcvMTItdG91Y2gtdGhlLXNreS53YXY=","YWV2by1yaXNpbmcvMTMtZnJhZ21lbnRzLW9mLWlubmVyLWxpZ2h0Lndhdg==","YWV2by1yaXNpbmcvMTQtb21uYXJhLndhdg==","YWV2by1yaXNpbmcvMTUtdmFlbGlzLWRyaWZ0Lndhdg==","YWV2by1yaXNpbmcvMTYtb3J5YS1mbHV4Lndhdg==","YWV2by1yaXNpbmcvMTcta2Vub3ItZmxvdy53YXY=","YWV2by1yaXNpbmcvMTgta2VvcmEtd2F2ZS53YXY=","YWV2by1yaXNpbmcvMTktbm90aGluZy10by13YWl0LWZvci53YXY=","YWV2by1yaXNpbmcvMjAtbmFldmEud2F2"].map(_d),
+  na:  ["aGFybW9ueS8wMS1oYXJtb255LWluLXRoZS10aW1lLndhdg==","aGFybW9ueS8wMi1sZWdlbmRzLW9mLXRoZS1lYXJ0aC53YXY=","aGFybW9ueS8wMy1mcm9tLWFzaGVzLXRvLXZpY3Rvcnkud2F2","aGFybW9ueS8wNC1mb3ItdGhpcy13b3JsZC53YXY=","aGFybW9ueS8wNS1pLWNhbGwtZm9ydGgtdGhlLWVsZGVyLWRheXMud2F2","aGFybW9ueS8wNi1sb3N0LWluLXRoZS1zaGVlbi53YXY=","aGFybW9ueS8wNy1pLWZseS1pbnRvLXRoZS1jb3NtaWMtbGlnaHRzLndhdg==","aGFybW9ueS8wOC1pbi10aGUtbWlzdC1vZi1ldmVuaW5nLWxpZ2h0cy53YXY=","aGFybW9ueS8wOS13aGVyZS10aGUtZWNob2VzLXBsYXkud2F2","aGFybW9ueS8xMC1ndWlkZWQtYnktc2lsZW5jZS53YXY="].map(_d),
+  nd:  ["bmlnaHQtZHJlYW0vMDEtbmlnaHQtZHJlYW0tZ2xvdy53YXY=","bmlnaHQtZHJlYW0vMDIteW91LWJyaW5nLXRoZS1uaWdodC53YXY=","bmlnaHQtZHJlYW0vMDMtaW50aW1hdGUtZWxlY3RyaWMtZWNob2VzLndhdg==","bmlnaHQtZHJlYW0vMDQtd2hlcmUtZHJlYW1zLWFyZS1wcm9mb3VuZC53YXY=","bmlnaHQtZHJlYW0vMDUtc2VjcmV0LWVjaG9lcy1vZi10aW1lLndhdg==","bmlnaHQtZHJlYW0vMDYtd2UtYWxsLWxpZ2h0LXRoYXQtc2hpbmVzLndhdg==","bmlnaHQtZHJlYW0vMDctc3VidGxlLWNvbm5lY3Rpb25zLndhdg==","bmlnaHQtZHJlYW0vMDgtZGVlcC1pbnNpZGUtdGhlLXNvdW5kLndhdg==","bmlnaHQtZHJlYW0vMDktaW4tdGhpcy1zd2VldC1odXNoLndhdg==","bmlnaHQtZHJlYW0vMTAtd2hlcmUtc2VjcmV0cy1icmVhdGhlLndhdg==","bmlnaHQtZHJlYW0vMTEtd2UtZmVlbC10aGUtaGFybW9ueS53YXY="].map(_d)
 };
 
 function loadFromServer(albumId){
@@ -1457,8 +1730,10 @@ function resetPlayer(){
 }
 
 // Volume & seek
-document.getElementById("volSlider").addEventListener("input",function(){if(gainNode)gainNode.gain.value=this.value/100;document.getElementById("volPct").textContent=this.value+"%";});
-document.getElementById("progBar").addEventListener("click",e=>{
+const volSliderEl=document.getElementById("volSlider");
+if(volSliderEl) volSliderEl.addEventListener("input",function(){if(gainNode)gainNode.gain.value=this.value/100;const volPctEl=document.getElementById("volPct"); if(volPctEl) volPctEl.textContent=this.value+"%";});
+const progBarEl=document.getElementById("progBar");
+if(progBarEl) progBarEl.addEventListener("click",e=>{
   if(curTrackIdx===-1)return;const key=curAlbum+"-"+curTrackIdx;if(!lib[key])return;
   const r=e.currentTarget.getBoundingClientRect(),pct=Math.max(0,Math.min(1,(e.clientX-r.left)/r.width));
   const off=pct*lib[key].durSec;
@@ -1467,9 +1742,10 @@ document.getElementById("progBar").addEventListener("click",e=>{
 
 // VISUALIZER
 const vizCanvas=document.getElementById("vizCanvas");
-const vctx=vizCanvas.getContext("2d");
+const vctx=vizCanvas ? vizCanvas.getContext("2d") : null;
 let vW=600,vH=400,vizT=0;
 function resizeViz(){
+  if(!vizCanvas) return;
   const p=vizCanvas.parentElement;
   const w=p.offsetWidth||p.clientWidth||600;
   const h=p.offsetHeight||p.clientHeight||400;
@@ -1478,10 +1754,12 @@ function resizeViz(){
   vizCanvas.style.width=w+"px";
   vizCanvas.style.height=h+"px";
 }
-resizeViz();
-new ResizeObserver(()=>{resizeViz();}).observe(vizCanvas.parentElement);
-setTimeout(resizeViz, 100);
-setTimeout(resizeViz, 500);
+if(vizCanvas){
+  resizeViz();
+  new ResizeObserver(()=>{resizeViz();}).observe(vizCanvas.parentElement);
+  setTimeout(resizeViz, 100);
+  setTimeout(resizeViz, 500);
+}
 
 // ══ VISUALIZER — Waveform circulaire pro ══
 
@@ -1503,11 +1781,7 @@ function drawViz(){
   const active = isPlaying && analyser;
   const cx = vW/2, cy = vH/2;
 
-  // ── subtle grid
-  vctx.strokeStyle="rgba(255,255,255,.03)";
-  vctx.lineWidth=devicePixelRatio;
-  for(let g=1;g<4;g++){vctx.beginPath();vctx.moveTo(0,vH*g/4);vctx.lineTo(vW,vH*g/4);vctx.stroke();}
-  for(let g=1;g<8;g++){vctx.beginPath();vctx.moveTo(vW*g/8,0);vctx.lineTo(vW*g/8,vH);vctx.stroke();}
+
 
   // ══ WAVEFORM CIRCULAIRE ══
     const baseR  = Math.min(vW,vH) * .22;
@@ -1636,46 +1910,66 @@ function drawViz(){
     }
   }
 }
-drawViz();
-
-vizCanvas.style.cursor="default";
-vizCanvas.title="Cliquez pour changer le mode de visualisation";
+if(vizCanvas && vctx){
+  drawViz();
+  vizCanvas.style.cursor="default";
+  vizCanvas.title="Cliquez pour changer le mode de visualisation";
+}
 
 // FILE INPUTS
-document.getElementById("fileInput").addEventListener("change",e=>{if(e.target.files.length)importFiles(e.target.files);e.target.value="";});
-document.getElementById("folderInput").addEventListener("change",e=>{
-  if(!e.target.files.length)return;
-  const all=Array.from(e.target.files);
-  const audio=all.filter(f=>f.type.startsWith("audio/")||AUDIO_EXT.test(f.name));
-  const nonAudio=all.length-audio.length;
-  const MIN_SIZE=50*1024;
-  const validAudio=audio.filter(f=>f.size>=MIN_SIZE);
-  const tinyAudio=audio.filter(f=>f.size<MIN_SIZE);
-  if(!validAudio.length){
-    showToast(`Aucun fichier audio valide — ${tinyAudio.length} fichier${tinyAudio.length>1?"s":""} trop petit${tinyAudio.length>1?"s":""} ignoré${tinyAudio.length>1?"s":""}`, "⚠");
-    return;
-  }
-  importFiles(validAudio);
-  const ignored=nonAudio+tinyAudio.length;
-  if(ignored>0)showToast(`${validAudio.length} audio${validAudio.length>1?"s":""} valide${validAudio.length>1?"s":""} · ${ignored} ignoré${ignored>1?"s":""} (non-audio ou trop petit${ignored>1?"s":""})`, "📂");
-  e.target.value="";
-});
+const fileInputEl = document.getElementById("fileInput");
+if(fileInputEl){
+  fileInputEl.addEventListener("change",e=>{if(e.target.files.length)importFiles(e.target.files);e.target.value="";});
+}
+const folderInputEl = document.getElementById("folderInput");
+if(folderInputEl){
+  folderInputEl.addEventListener("change",e=>{
+    if(!e.target.files.length)return;
+    const all=Array.from(e.target.files);
+    const audio=all.filter(f=>f.type.startsWith("audio/")||AUDIO_EXT.test(f.name));
+    const nonAudio=all.length-audio.length;
+    const MIN_SIZE=50*1024;
+    const validAudio=audio.filter(f=>f.size>=MIN_SIZE);
+    const tinyAudio=audio.filter(f=>f.size<MIN_SIZE);
+    if(!validAudio.length){
+      showToast(`Aucun fichier audio valide — ${tinyAudio.length} fichier${tinyAudio.length>1?"s":""} trop petit${tinyAudio.length>1?"s":""} ignoré${tinyAudio.length>1?"s":""}`, "⚠");
+      return;
+    }
+    importFiles(validAudio);
+    const ignored=nonAudio+tinyAudio.length;
+    if(ignored>0)showToast(`${validAudio.length} audio${validAudio.length>1?"s":""} valide${validAudio.length>1?"s":""} · ${ignored} ignoré${ignored>1?"s":""} (non-audio ou trop petit${ignored>1?"s":""})`, "📂");
+    e.target.value="";
+  });
+}
 const dz=document.getElementById("dropZone");
-["dragenter","dragover"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("over");}));
-["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove("over");}));
-dz.addEventListener("drop",e=>{if(e.dataTransfer.files.length)importFiles(e.dataTransfer.files);});
-dz.addEventListener("click",()=>document.getElementById("fileInput").click());
+if(dz){
+  ["dragenter","dragover"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.add("over");}));
+  ["dragleave","drop"].forEach(ev=>dz.addEventListener(ev,e=>{e.preventDefault();dz.classList.remove("over");}));
+  dz.addEventListener("drop",e=>{if(e.dataTransfer.files.length)importFiles(e.dataTransfer.files);});
+  dz.addEventListener("click",()=>{ if(fileInputEl) fileInputEl.click(); });
+}
 document.addEventListener("dragover",e=>e.preventDefault());
 document.addEventListener("drop",e=>{e.preventDefault();if(e.dataTransfer.files.length)importFiles(e.dataTransfer.files);});
 
 // PAGE NAV
 function showPage(p){
-  document.getElementById("pagePlayer").className="page"+(p==="player"?" on":"");
-  document.getElementById("pageBio").className="page"+(p==="bio"?" on":"");
-  document.getElementById("pageVideo").className="page"+(p==="video"?" on":"");
-  document.getElementById("pnavPlayer").className="pgnav"+(p==="player"?" on":"");
-  document.getElementById("pnavBio").className="pgnav"+(p==="bio"?" on":"");
-  document.getElementById("pnavVideo").className="pgnav"+(p==="video"?" on":"");
+  ["player","bio","video","artist","contact"].forEach(id=>{
+    const pg=document.getElementById("page"+id.charAt(0).toUpperCase()+id.slice(1));
+    if(pg) pg.className="page"+(p===id?" on":"");
+    const btn=document.getElementById("pnav"+id.charAt(0).toUpperCase()+id.slice(1));
+    if(btn) btn.className="pgnav"+(p===id?" on":"");
+  });
+}
+
+function sendContact(){
+  const name=document.getElementById("ctName").value.trim();
+  const email=document.getElementById("ctEmail").value.trim();
+  const msg=document.getElementById("ctMsg").value.trim();
+  if(!name||!email||!msg){showToast("Remplissez tous les champs","⚠");return;}
+  const mailto="mailto:cirillo@orange.fr?subject=Contact%20Studio%20Eleydes%20—%20"+encodeURIComponent(name)+"&body="+encodeURIComponent("Nom : "+name+"\nEmail : "+email+"\n\n"+msg);
+  window.location.href=mailto;
+  document.getElementById("ctSuccess").style.display="block";
+  showToast("Message préparé ✓","✉");
 }
 
 // KEYBOARD
@@ -1919,6 +2213,9 @@ restoreFromDB();
 const bEdm=document.getElementById("bioArtEdm");if(bEdm)bEdm.src=COVERS.edm;
 const bNa=document.getElementById("bioArtNa");if(bNa)bNa.src=COVERS.na;
 const bNd=document.getElementById("bioArtNd");if(bNd)bNd.src=COVERS.nd;
+// Artist page logos
+const aEdm=document.getElementById("abLogoEdm");if(aEdm)aEdm.src=COVERS.edm;
+const aNa=document.getElementById("abLogoNa");if(aNa)aNa.src=COVERS.na;
 </script>
 </body>
 </html>
