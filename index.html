@@ -1424,6 +1424,7 @@ const AUDIO_URLS = {
 };
 
 function loadFromServer(albumId){
+  unlockAudio();
   const urls = AUDIO_URLS[albumId];
   if(!urls){ showToast('Album inconnu','x'); return; }
   showToast('Chargement en cours…','x23F3');
@@ -1444,13 +1445,28 @@ function loadFromServer(albumId){
 }
 function finishLoad(albumId,ok,total){
   buildTracklist(albumId);
-
-  // iPad/iOS : ne pas lancer le son automatiquement après chargement.
-  // Le son doit démarrer après une action utilisateur sur le bouton ▶.
-  if(ok>0 && curTrackIdx===-1)playEntry(albumId,0,false);
-
-  const msg=ok===total?'Album complet charge ('+ok+' titres)':ok+' titres charges sur '+total;
-  showToast(msg,'x1F3B5');
+  // Ne pas lancer automatiquement : Safari/iPad bloque l'audio sans appui utilisateur.
+  if(ok>0 && curTrackIdx===-1){
+    curAlbum=albumId;
+    curTrackIdx=0;
+    pauseOffset=0;
+    const alb=ALBUMS[albumId], t=alb.tracks[0], entry=lib[albumId+'-0'];
+    if(entry){
+      document.getElementById("plTitle").textContent=t.n;
+      document.getElementById("plArtist").textContent=alb.artist+" · "+alb.name;
+      document.getElementById("viAlbum").textContent=alb.name.toUpperCase();
+      document.getElementById("viTrack").textContent=t.n;
+      document.getElementById("timeTot").textContent=fmtTime(entry.durSec);
+      document.getElementById("plCoverImg").src=COVERS[albumId];
+      document.getElementById("rpCoverImg").src=COVERS[albumId];
+      const row=document.getElementById("ti-"+albumId+"-0");
+      if(row) row.classList.add("active","active-"+albumId);
+      document.getElementById("btnPlay").disabled=false;
+      document.getElementById("btnPlay").textContent="▶";
+    }
+  }
+  const msg=ok===total?'Album prêt — touchez ▶ pour écouter ('+ok+' titres)':ok+' titres chargés sur '+total+' — touchez ▶';
+  showToast(msg,'🎵');
 }
 
 const ALBUMS={
@@ -1500,9 +1516,35 @@ const lib={};
 const AUDIO_EXT=/\.(mp3|wav|flac|ogg|aac|m4a|opus|wma|aiff|aif)$/i;
 
 function getAC(){
-  if(!AC){AC=new(window.AudioContext||window.webkitAudioContext)();analyser=AC.createAnalyser();analyser.fftSize=2048;analyser.smoothingTimeConstant=0.82;gainNode=AC.createGain();gainNode.gain.value=.8;analyser.connect(gainNode);gainNode.connect(AC.destination);}
-  if(AC.state==="suspended")AC.resume();return AC;
+  if(!AC){
+    AC=new(window.AudioContext||window.webkitAudioContext)();
+    analyser=AC.createAnalyser();
+    analyser.fftSize=2048;
+    analyser.smoothingTimeConstant=0.82;
+    gainNode=AC.createGain();
+    gainNode.gain.value=.8;
+    analyser.connect(gainNode);
+    gainNode.connect(AC.destination);
+  }
+  return AC;
 }
+
+// iPad / iPhone / Safari : le contexte audio doit être activé par une action utilisateur.
+function unlockAudio(){
+  const ctx=getAC();
+  const resumePromise = ctx.state === "suspended" ? ctx.resume() : Promise.resolve();
+  try{
+    const silent=ctx.createBuffer(1,1,22050);
+    const src=ctx.createBufferSource();
+    src.buffer=silent;
+    src.connect(ctx.destination);
+    src.start(0);
+  }catch(e){}
+  return resumePromise.catch(()=>{});
+}
+["touchstart","touchend","mousedown","keydown"].forEach(ev=>{
+  document.addEventListener(ev,()=>{ unlockAudio(); },{once:true,passive:true});
+});
 
 // ALBUM SWITCH
 function switchAlbum(id){
@@ -1653,7 +1695,7 @@ function similarity(a,b){const wa=a.split(/\s+/),wb=b.split(/\s+/);return wa.fil
 
 
 // PLAYBACK
-function playEntry(albumId,trackIdx,autoplay=true){
+function playEntry(albumId,trackIdx){
   const key=albumId+"-"+trackIdx;if(!lib[key])return;
   killSource();pauseOffset=0;curAlbum=albumId;curTrackIdx=trackIdx;
   const alb=ALBUMS[albumId],t=alb.tracks[trackIdx],entry=lib[key];
@@ -1669,31 +1711,28 @@ function playEntry(albumId,trackIdx,autoplay=true){
   document.getElementById("plCoverImg").src=COVERS[albumId];
   document.getElementById("rpCoverImg").src=COVERS[albumId];
   switchAlbum(albumId);
+  playBuf(entry.buf,0);
+  document.getElementById("btnPlay").textContent="⏸";
+  document.getElementById("viPlaying").className="vi-playing show";
   document.getElementById("btnPlay").disabled=false;
   showPage("player");
-
-  if(autoplay){
-    playBuf(entry.buf,0);
-    document.getElementById("btnPlay").textContent="⏸";
-    document.getElementById("viPlaying").className="vi-playing show";
-  } else {
-    document.getElementById("btnPlay").textContent="▶";
-    document.getElementById("viPlaying").className="vi-playing";
-    showToast("Touchez ▶ pour lancer le son","🎵");
-  }
 }
 
 function playBuf(buf,offset){
   killSource();
   const ctx=getAC();
-  const startNow=()=>{
-    const node=ctx.createBufferSource();node.buffer=buf;node.connect(analyser);
+  unlockAudio().then(()=>{
+    const node=ctx.createBufferSource();
+    node.buffer=buf;
+    node.connect(analyser);
     const safe=Math.max(0,Math.min(offset||0,buf.duration-.01));
-    node.start(0,safe);node.onended=()=>{if(!manualStop&&isPlaying)onEnded();};
-    sourceNode=node;startTime=ctx.currentTime-safe;isPlaying=true;manualStop=false;
-  };
-  if(ctx.state==="suspended"){ctx.resume().then(startNow).catch(startNow);}
-  else startNow();
+    node.start(0,safe);
+    node.onended=()=>{if(!manualStop&&isPlaying)onEnded();};
+    sourceNode=node;
+    startTime=ctx.currentTime-safe;
+    isPlaying=true;
+    manualStop=false;
+  });
 }
 
 function killSource(){
@@ -1704,9 +1743,8 @@ function killSource(){
 function onEnded(){isPlaying=false;repeat?playEntry(curAlbum,curTrackIdx):nextTrack();}
 
 function togglePlay(){
+  unlockAudio();
   if(curTrackIdx===-1)return;
-  const ctx=getAC();
-  if(ctx.state==="suspended")ctx.resume().catch(()=>{});
   if(isPlaying){
     pauseOffset=getCurTime();killSource();isPlaying=false;
     document.getElementById("btnPlay").textContent="▶";
