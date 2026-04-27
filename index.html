@@ -1444,7 +1444,11 @@ function loadFromServer(albumId){
 }
 function finishLoad(albumId,ok,total){
   buildTracklist(albumId);
-  if(ok>0 && curTrackIdx===-1)playEntry(albumId,0);
+
+  // iPad/iOS : ne pas lancer le son automatiquement après chargement.
+  // Le son doit démarrer après une action utilisateur sur le bouton ▶.
+  if(ok>0 && curTrackIdx===-1)playEntry(albumId,0,false);
+
   const msg=ok===total?'Album complet charge ('+ok+' titres)':ok+' titres charges sur '+total;
   showToast(msg,'x1F3B5');
 }
@@ -1649,7 +1653,7 @@ function similarity(a,b){const wa=a.split(/\s+/),wb=b.split(/\s+/);return wa.fil
 
 
 // PLAYBACK
-function playEntry(albumId,trackIdx){
+function playEntry(albumId,trackIdx,autoplay=true){
   const key=albumId+"-"+trackIdx;if(!lib[key])return;
   killSource();pauseOffset=0;curAlbum=albumId;curTrackIdx=trackIdx;
   const alb=ALBUMS[albumId],t=alb.tracks[trackIdx],entry=lib[key];
@@ -1665,19 +1669,31 @@ function playEntry(albumId,trackIdx){
   document.getElementById("plCoverImg").src=COVERS[albumId];
   document.getElementById("rpCoverImg").src=COVERS[albumId];
   switchAlbum(albumId);
-  playBuf(entry.buf,0);
-  document.getElementById("btnPlay").textContent="⏸";
-  document.getElementById("viPlaying").className="vi-playing show";
   document.getElementById("btnPlay").disabled=false;
   showPage("player");
+
+  if(autoplay){
+    playBuf(entry.buf,0);
+    document.getElementById("btnPlay").textContent="⏸";
+    document.getElementById("viPlaying").className="vi-playing show";
+  } else {
+    document.getElementById("btnPlay").textContent="▶";
+    document.getElementById("viPlaying").className="vi-playing";
+    showToast("Touchez ▶ pour lancer le son","🎵");
+  }
 }
 
 function playBuf(buf,offset){
-  killSource();const ctx=getAC();
-  const node=ctx.createBufferSource();node.buffer=buf;node.connect(analyser);
-  const safe=Math.max(0,Math.min(offset||0,buf.duration-.01));
-  node.start(0,safe);node.onended=()=>{if(!manualStop&&isPlaying)onEnded();};
-  sourceNode=node;startTime=ctx.currentTime-safe;isPlaying=true;manualStop=false;
+  killSource();
+  const ctx=getAC();
+  const startNow=()=>{
+    const node=ctx.createBufferSource();node.buffer=buf;node.connect(analyser);
+    const safe=Math.max(0,Math.min(offset||0,buf.duration-.01));
+    node.start(0,safe);node.onended=()=>{if(!manualStop&&isPlaying)onEnded();};
+    sourceNode=node;startTime=ctx.currentTime-safe;isPlaying=true;manualStop=false;
+  };
+  if(ctx.state==="suspended"){ctx.resume().then(startNow).catch(startNow);}
+  else startNow();
 }
 
 function killSource(){
@@ -1689,6 +1705,8 @@ function onEnded(){isPlaying=false;repeat?playEntry(curAlbum,curTrackIdx):nextTr
 
 function togglePlay(){
   if(curTrackIdx===-1)return;
+  const ctx=getAC();
+  if(ctx.state==="suspended")ctx.resume().catch(()=>{});
   if(isPlaying){
     pauseOffset=getCurTime();killSource();isPlaying=false;
     document.getElementById("btnPlay").textContent="▶";
