@@ -1037,6 +1037,9 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
 }
 
 .ti{touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,255,255,.08)}
+
+/* Public version: hide album deletion control */
+.clear-album-btn{display:none!important}
 </style>
 </head>
 <body>
@@ -1689,14 +1692,6 @@ function buildTracklist(albumId){
   sec.innerHTML=`<div class="tl-sec-dot" style="background:var(--${albumId}1)"></div>${alb.name} · ${alb.tracks.length} titres`;
   list.appendChild(sec);
   const hasAny=alb.tracks.some((_,i)=>lib[albumId+"-"+i]);
-  // Show "clear album" button only if at least one track is loaded
-  if(hasAny){
-    const clrBtn=document.createElement("button");
-    clrBtn.className="clear-album-btn";
-    clrBtn.innerHTML="🗑 Supprimer tout cet album";
-    clrBtn.onclick=()=>clearAlbum(albumId);
-    list.appendChild(clrBtn);
-  }
   if(!hasAny){
     const em=document.createElement("div");em.className="empty";
     em.innerHTML=`<div class="empty-ic">🎵</div><div class="empty-t">Charger les pistes</div><div class="empty-s">Depuis le serveur ou depuis vos fichiers locaux</div><div class="empty-btns"><button class="ebtn" style="background:rgba(64,208,255,.12);border-color:rgba(64,208,255,.3);color:#40d0ff" onclick="loadFromServer('${albumId}')">&#127760; Charger depuis le site</button><button class="ebtn" onclick="document.getElementById('fileInput').click()">+ Fichiers locaux</button><button class="ebtn pur" onclick="document.getElementById('folderInput').click()">&#128194; Dossier</button></div>`;
