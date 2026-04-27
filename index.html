@@ -1036,6 +1036,7 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
   .admin-toggle{display:none !important;}
 }
 
+.ti{touch-action:manipulation;-webkit-tap-highlight-color:rgba(255,255,255,.08)}
 </style>
 </head>
 <body>
@@ -1704,9 +1705,20 @@ list.appendChild(em);return;
   alb.tracks.forEach((t,i)=>{
     const key=albumId+"-"+i;const entry=lib[key];
     const row=document.createElement("div");row.className="ti";row.id="ti-"+albumId+"-"+i;
+    if(albumId===curAlbum && i===curTrackIdx){row.classList.add("active","active-"+albumId);}
+    row.setAttribute("role","button");
+    row.setAttribute("tabindex", entry ? "0" : "-1");
     const dur=entry?fmtTime(entry.durSec):t.dur;
     row.innerHTML=`<span class="ti-num">${i+1}</span><div class="ti-art art-${albumId}"><img src="${COVERS[albumId]}" alt=""></div><div class="ti-name" title="${t.n}">${t.n}</div><span class="ti-dur" id="tdur-${albumId}-${i}">${dur}</span>${entry?`<button class="ti-del" onclick="removeEntry(event,'${albumId}',${i})" title="Retirer">✕</button>`:""}`;
-    if(entry){row.addEventListener("click",e=>{if(e.target.classList.contains("ti-del"))return;playEntry(albumId,i);});}
+    if(entry){
+      const startThisTrack=e=>{
+        if(e.target && e.target.classList && e.target.classList.contains("ti-del"))return;
+        if(e.cancelable)e.preventDefault();
+        playEntry(albumId,i);
+      };
+      row.addEventListener("pointerup",startThisTrack,{passive:false});
+      row.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" ")startThisTrack(e);});
+    }
     else{row.style.opacity=".4";row.style.cursor="default";}
     list.appendChild(row);
   });
@@ -1783,6 +1795,7 @@ function similarity(a,b){const wa=a.split(/\s+/),wb=b.split(/\s+/);return wa.fil
 
 // PLAYBACK
 function updateNowPlaying(albumId,trackIdx){
+  const previousAlbum=curAlbum;
   curAlbum=albumId;curTrackIdx=trackIdx;
   const key=albumId+"-"+trackIdx;
   const alb=ALBUMS[albumId],t=alb.tracks[trackIdx],entry=lib[key]||{};
@@ -1796,7 +1809,7 @@ function updateNowPlaying(albumId,trackIdx){
   document.getElementById("timeTot").textContent=fmtTime(entry.durSec||t.sec||0);
   document.getElementById("plCoverImg").src=COVERS[albumId];
   document.getElementById("rpCoverImg").src=COVERS[albumId];
-  switchAlbum(albumId);
+  if(previousAlbum!==albumId){switchAlbum(albumId);}
 }
 
 function playEntry(albumId,trackIdx){
