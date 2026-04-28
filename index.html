@@ -1040,6 +1040,23 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
 
 /* Public version: hide album deletion control */
 .clear-album-btn{display:none!important}
+
+/* === CORRECTION SMARTPHONE PORTRAIT : supprimer l'espace vide import + lecture plus lisible === */
+@media (max-width: 760px) and (orientation: portrait){
+  .app{padding-bottom:160px !important;}
+  .drop-zone{display:none !important;}
+  .sidebar{max-height:none !important;}
+  .sb-tabs{position:sticky;top:0;z-index:8;background:rgba(15,23,38,.98);}
+  .tl-sec{margin-top:0 !important;}
+  .ti{min-height:72px !important;padding:.78rem .85rem !important;}
+  .ti-art{width:52px !important;height:52px !important;}
+  .ti-name{font-size:1rem !important;line-height:1.25 !important;-webkit-line-clamp:2;}
+  .ti-dur{font-size:.82rem !important;}
+  .center{min-height:36vh !important;}
+  .right-panel{display:none !important;}
+  .player{min-height:134px !important;}
+}
+
 </style>
 </head>
 <body>
