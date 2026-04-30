@@ -295,6 +295,60 @@ body.server-mode .ibtn-f, body.server-mode .ibtn-d{display:none}
 .viz-wrap{flex:1;position:relative;overflow:hidden;min-height:0;}
 canvas.viz{position:absolute;top:0;left:0;width:100%;height:100%;display:block}
 
+/* === VISUALIZER PREMIUM : image artistique + infos piste au centre === */
+.viz-bg{
+  position:absolute;
+  inset:0;
+  background:
+    linear-gradient(rgba(6,8,15,.45), rgba(6,8,15,.88)),
+    url('images/aevo-bg.jpg') center top/contain no-repeat;
+  background-color:#06080f;
+  z-index:0;
+  filter:contrast(1.08) saturate(1.18);
+  transform:scale(1.01);
+}
+.viz-glow{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:min(42vw,430px);height:min(42vw,430px);
+  border-radius:50%;
+  background:radial-gradient(circle, rgba(90,150,255,.28), rgba(122,77,255,.12) 42%, transparent 72%);
+  z-index:1;
+  pointer-events:none;
+}
+.viz-center{
+  position:absolute;
+  top:50%;left:50%;
+  transform:translate(-50%,-50%);
+  width:min(330px,42vw);
+  min-height:160px;
+  border-radius:50%;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  z-index:4;
+  pointer-events:none;
+  padding:2rem;
+  background:radial-gradient(circle, rgba(6,8,15,.74), rgba(6,8,15,.40) 55%, transparent 72%);
+  text-shadow:0 2px 18px rgba(0,0,0,.9);
+}
+#vizTitle{font-family:var(--D);font-size:clamp(1.15rem,2.1vw,2rem);letter-spacing:.08em;color:#fff;line-height:1.05;max-width:100%;}
+#vizArtist{margin-top:.42rem;font-size:clamp(.7rem,1vw,.95rem);color:rgba(230,238,255,.82);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:100%;}
+#vizTime{margin-top:.6rem;font-size:clamp(.78rem,1.15vw,1rem);font-weight:600;letter-spacing:.06em;color:#8bd7ff;}
+canvas.viz{z-index:2;}
+.genre-badge,.viz-info,.vi-bars{z-index:5;}
+@media (max-width:760px){
+  .viz-bg{background-size:cover;background-position:center top;opacity:.45}
+  .viz-glow{width:260px;height:260px}
+  .viz-center{width:230px;min-height:120px;padding:1.2rem}
+  #vizTitle{font-size:1.25rem}
+  #vizArtist,#vizTime{font-size:.78rem}
+}
+
+
 /* Viz text overlay */
 .viz-info{position:absolute;bottom:1.4rem;left:1.4rem;pointer-events:none;z-index:2}
 .vi-album{
@@ -1128,7 +1182,14 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
 <main class="center">
   <div class="page on" id="pagePlayer">
     <div class="viz-wrap" id="vizWrap">
+      <div class="viz-bg" aria-hidden="true"></div>
+      <div class="viz-glow" aria-hidden="true"></div>
       <canvas class="viz" id="vizCanvas"></canvas>
+      <div class="viz-center" id="vizCenter" aria-live="polite">
+        <div id="vizTitle">Sélectionnez une piste</div>
+        <div id="vizArtist">Studio Eleydes</div>
+        <div id="vizTime">0:00 / 0:00</div>
+      </div>
       <div class="genre-badge gb-edm" id="genreBadge">Electronic / Dance</div>
       <div class="viz-info">
         <div class="vi-album c-edm" id="viAlbum">AEVO RISING</div>
@@ -1818,6 +1879,12 @@ function updateNowPlaying(albumId,trackIdx){
   document.getElementById("plArtist").textContent=alb.artist+" · "+alb.name;
   document.getElementById("viAlbum").textContent=alb.name.toUpperCase();
   document.getElementById("viTrack").textContent=t.n;
+  const vcTitle=document.getElementById("vizTitle");
+  const vcArtist=document.getElementById("vizArtist");
+  const vcTime=document.getElementById("vizTime");
+  if(vcTitle)vcTitle.textContent=t.n;
+  if(vcArtist)vcArtist.textContent=alb.artist;
+  if(vcTime)vcTime.textContent="0:00 / "+fmtTime(entry.durSec||t.sec||0);
   document.getElementById("timeTot").textContent=fmtTime(entry.durSec||t.sec||0);
   document.getElementById("plCoverImg").src=COVERS[albumId];
   document.getElementById("rpCoverImg").src=COVERS[albumId];
@@ -1866,6 +1933,8 @@ audioEl.addEventListener("loadedmetadata",()=>{
   if(lib[key] && isFinite(audioEl.duration)){
     lib[key].durSec=audioEl.duration;
     document.getElementById("timeTot").textContent=fmtTime(audioEl.duration);
+    const vcTime=document.getElementById("vizTime");
+    if(vcTime)vcTime.textContent=fmtTime(audioEl.currentTime||0)+" / "+fmtTime(audioEl.duration);
     const el=document.getElementById('tdur-'+curAlbum+'-'+curTrackIdx);
     if(el)el.textContent=fmtTime(audioEl.duration);
   }
@@ -2089,6 +2158,8 @@ function drawViz(){
       const cur=getCurTime(),dur=lib[key].durSec||audioEl.duration||1,pct=Math.min(100,cur/dur*100);
       document.getElementById("progFill").style.width=pct+"%";
       document.getElementById("timeCur").textContent=fmtTime(cur);
+      const vcTime=document.getElementById("vizTime");
+      if(vcTime)vcTime.textContent=fmtTime(cur)+" / "+fmtTime(dur);
     }
   }
 }
