@@ -22,7 +22,29 @@ canvas {
 body {
     background: url('aevo-bg.jpg') center center / cover no-repeat !important;
 }
+/* 🔥 SUPPRIME LE DISQUE NOIR AU CENTRE (IMPORTANT) */
+.viz-wrap {
+    background: transparent !important;
+}
 
+/* 🔥 SUPPRIME LE FOND DU CANVAS */
+canvas {
+    background: transparent !important;
+}
+
+/* 🔥 FORCE LA LUMINOSITÉ */
+.viz-wrap,
+.visualizer {
+    opacity: 1 !important;
+    filter: none !important;
+}
+
+/* 🔥 ENLÈVE TOUS LES OVERLAYS RESTANTS */
+.viz-wrap::before,
+.viz-wrap::after {
+    content: none !important;
+    display: none !important;
+}
 /* 🔥 enlève tous les effets sombres */
 * {
     backdrop-filter: none !important;
