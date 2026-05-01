@@ -2041,7 +2041,7 @@ function drawViz(){
     ringGlow.addColorStop(.4,  pal.c1+".06)");
     ringGlow.addColorStop(1,  "transparent");
     vctx.beginPath(); vctx.arc(cx,cy,baseR*1.4,0,Math.PI*2);
-    vctx.fillStyle=ringGlow; vctx.fill();
+    vcctx.fillStyle = "rgba(0,0,0,0)";tx.fillStyle=ringGlow; vctx.fill();
 
     // Frequency bars — circular, mirrored
     for(let i=0;i<BARS;i++){
