@@ -1892,7 +1892,15 @@ audioEl.addEventListener("loadedmetadata",()=>{
 });
 
 function togglePlay(){
-  if(curTrackIdx===-1){loadFromServer(curAlbum);return;}
+  if(AC&&AC.state==="suspended")AC.resume();
+  if(curTrackIdx===-1){
+    loadFromServer(curAlbum);
+    setTimeout(()=>{
+      const key=curAlbum+"-0";
+      if(lib[key]){curTrackIdx=0;updateNowPlaying(curAlbum,0);playBuf(lib[key],0);}
+    },300);
+    return;
+  }
   const key=curAlbum+"-"+curTrackIdx;if(!lib[key]){loadFromServer(curAlbum);return;}
   if(isPlaying){
     pauseOffset=getCurTime();killSource();
