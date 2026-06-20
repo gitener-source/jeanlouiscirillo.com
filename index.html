@@ -1084,21 +1084,21 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
   </a>
 
   <div class="album-selector">
-    <button class="asel" id="asel-na" onclick="switchAlbum('na')">
+    <button class="asel" id="asel-na" onclick="if(AC&&AC.state==='suspended')AC.resume();switchAlbum('na');loadFromServer('na')">
       <div class="asel-cover"><img id="asel-img-na" src="" alt="Harmony in the Time"></div>
       <div class="asel-info">
         <div class="asel-name">Harmony in the Time</div>
         <div class="asel-artist">Edershield · Oct. 2024</div>
       </div>
     </button>
-    <button class="asel" id="asel-nd" onclick="switchAlbum('nd')">
+    <button class="asel" id="asel-nd" onclick="if(AC&&AC.state==='suspended')AC.resume();switchAlbum('nd');loadFromServer('nd')">
       <div class="asel-cover"><img id="asel-img-nd" src="" alt="Night Dream Glow"></div>
       <div class="asel-info">
         <div class="asel-name">Night Dream Glow</div>
         <div class="asel-artist">Edershield · 1 Avr. 2025</div>
       </div>
     </button>
-    <button class="asel on-edm" id="asel-edm" onclick="switchAlbum('edm')">
+    <button class="asel on-edm" id="asel-edm" onclick="if(AC&&AC.state==='suspended')AC.resume();switchAlbum('edm');loadFromServer('edm')">
       <div class="asel-cover"><img id="asel-img-edm" src="" alt="Aevo Rising"></div>
       <div class="asel-info">
         <div class="asel-name">Aevo Rising</div>
@@ -1123,9 +1123,9 @@ input.vol-r{height:4px;background:rgba(255,255,255,.14)}
 <!-- SIDEBAR -->
 <aside class="sidebar">
   <div class="sb-tabs">
-    <button class="sbtab" id="sbt-na"  onclick="switchAlbum('na')">Harmony</button>
-    <button class="sbtab" id="sbt-nd"  onclick="switchAlbum('nd')">Night Dream</button>
-    <button class="sbtab" id="sbt-edm" onclick="switchAlbum('edm')">Aevo Rising</button>
+    <button class="sbtab" id="sbt-na"  onclick="if(AC&&AC.state==='suspended')AC.resume();switchAlbum('na');loadFromServer('na')">Harmony</button>
+    <button class="sbtab" id="sbt-nd"  onclick="if(AC&&AC.state==='suspended')AC.resume();switchAlbum('nd');loadFromServer('nd')">Night Dream</button>
+    <button class="sbtab" id="sbt-edm" onclick="if(AC&&AC.state==='suspended')AC.resume();switchAlbum('edm');loadFromServer('edm')">Aevo Rising</button>
     <button class="sbtab" style="color:var(--edm3);font-size:.58rem;padding:.4rem .3rem" onclick="loadFromServer(curAlbum)" title="Charger depuis jeanlouiscirillo.com">🌐</button>
   </div>
   <div class="drop-zone hide-when-online" id="dropZone">
@@ -1587,7 +1587,7 @@ function loadFromServer(albumId){
 }
 function finishLoad(albumId,ok,total){
   buildTracklist(albumId);
-  if(ok>0 && curTrackIdx===-1){
+  if(ok>0 && (curTrackIdx===-1 || curAlbum===albumId)){
     curAlbum=albumId;
     curTrackIdx=0;
     updateNowPlaying(albumId,0);
